@@ -24,7 +24,7 @@ while($row = $db->get_row()) {
   <body>
     <div id="songs">
       <h2><?php print $day; ?>'s songs:</h2>
-      <a href="index.php?timestamp=<?php print $time - 86400; ?>">Previous Day</a>
+      <a href="index.php?timestamp=<?php print $time - 86400; ?>">Previous Day</a> - <a href="index.php">Return to Today</a>
       <ul>
 	<?php foreach($tracks as $track) { ?>
 	<li><?php print $track['name'];?> - <a href="<?php print $track['link']; ?>"><?php print "{$track['track']} by {$track['artist']}"; ?></a></li>
