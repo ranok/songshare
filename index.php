@@ -10,7 +10,8 @@ if (isset($_GET['timestamp']))
 }
 $today = date("F j, Y", $time);
 $midnight = strtotime("12:00AM ".$today." EST");
-$db->query("SELECT * FROM `songshare` WHERE `date` > '$midnight';");
+$midnight2 = $midnight + 86400;
+$db->query("SELECT * FROM `songshare` WHERE `date` > '$midnight' AND `date` < '$midnight2';");
 $tracks = Array();
 while($row = $db->get_row()) {
   $tracks[] = $row;
