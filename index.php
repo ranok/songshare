@@ -2,7 +2,7 @@
 require('db.class.php');
 $db = new DB();
 $today = date("F j, Y");
-$midnight = strtotime("12:00AM ".$today);
+$midnight = strtotime("12:00AM ".$today." EST");
 $db->query("SELECT * FROM `songshare` WHERE `date` > '$midnight';");
 $tracks = Array();
 while($row = $db->get_row()) {
