@@ -1,7 +1,14 @@
 <?php
 require('db.class.php');
 $db = new DB();
-$today = date("F j, Y");
+$time = time();
+$day = 'Today';
+if (isset($_GET['timestamp']))
+{
+  $time = $_GET['timestamp'];
+  $day = date('l', $time);
+}
+$today = date("F j, Y", $time);
 $midnight = strtotime("12:00AM ".$today." EST");
 $db->query("SELECT * FROM `songshare` WHERE `date` > '$midnight';");
 $tracks = Array();
@@ -15,7 +22,8 @@ while($row = $db->get_row()) {
   </head>
   <body>
     <div id="songs">
-      <h2>Today's songs:</h2>
+      <h2><?php print $day; ?>'s songs:</h2>
+      <a href="index.php?timestamp=<?php print $time - 86400; ?>">Previous Day</a>
       <ul>
 	<?php foreach($tracks as $track) { ?>
 	<li><?php print $track['name'];?> - <a href="<?php print $track['link']; ?>"><?php print "{$track['track']} by {$track['artist']}"; ?></a></li>
